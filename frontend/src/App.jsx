@@ -1,33 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+import SideBarNav from './shared/components/SideBarNav';
+import Home from './home/pages/Home';
+import UserList from './admin/users/pages/UserList';
+import Login from './admin/users/pages/Login';
+import { AuthContext } from './shared/context/auth-context';
+import { useState, useCallback } from 'react';
 
 function App() {
-  const [contents, setContents] = useState([]);
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/content')
-      .then(res => {
-        setContents(res.data);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const login = useCallback(() => {
+    setIsLoggedIn(true);
+  }, []);
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
   }, []);
 
   return (
-    <div>
-      <h1>Content List</h1>
-      <ul>
-        {contents.map(content => (
-          <li key={content._id}>
-            <h2>{content.title}</h2>
-            <p>{content.body}</p>
-            <p>Author: {content.author.username}</p>
-          </li>
-        ))}
-      </ul>
+    <div className='flex'>
+      <AuthContext.Provider value={{isLoggedIn, login, logout}}>
+      <Router>
+        <SideBarNav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/users" element={<UserList />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>        
+      </Router>
+      </AuthContext.Provider>
     </div>
-  );
+    
+  )
 }
 
-export default App;
+export default App

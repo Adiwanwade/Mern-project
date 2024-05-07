@@ -2,8 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "src/app.js",
+  "type": "module",
   "scripts": {
+    "start": "nodemon src/app.js",
+    "seed": "node src/database/seeder.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Aditya",

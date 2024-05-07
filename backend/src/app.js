@@ -1,52 +1,56 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const jwt = require('jsonwebtoken');
+import './database/connection.js'
+import express from 'express';
+import usersRoutes from './routes/users-routes.js';
+import HttpError from './models/http-error.js';
+import path from 'path';
+import { unlink } from 'fs';
 
 const app = express();
+app.use(express.json());
 
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
-
-// MongoDB Connection
-mongoose.connect('mongodb+srv://<username>:<password>@<cluster-url>/<database-name>?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+    );
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PATCH, DELETE, OPTIONS'
+    );
+    if(req.method === 'OPTIONS'){
+        return res.status(200).json({});
+    }
+    next();
 });
 
-// Models
-import User from '../models/user.js';
-import Content from '../models/content';
+app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
-// Routes
-const authRoutes = require('./routes/auth');
-const contentRoutes = require('./routes/content');
+app.use('/api/users', usersRoutes);
 
-// JWT Secret
-const JWT_SECRET = 'yourJWTSecret';
+app.use((req, res, next) => {
+    throw new HttpError('Page does not exist', 404);
+});
 
-// JWT Middleware
-const requireAuth = (req, res, next) => {
-  const token = req.headers.authorization;
+// special error handler middleware
+app.use((error, req, res, next) => {
+    if (req.file) {
+        unlink(req.file.path, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+    if (res.headerSent) {
+        return next(error);
+    }
+    res
+        .status(error.code || 500)
+        .json({
+            message: error.message || 'Server error'
+        });
+});
 
-  if (token) {
-    jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
-      if (err) {
-        res.status(401).json({ error: 'Invalid token' });
-      } else {
-        next();
-      }
-    });
-  } else {
-    res.status(401).json({ error: 'Token not provided' });
-  }
-};
-
-app.use('/auth', authRoutes);
-app.use('/content', requireAuth, contentRoutes);
-
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const port = 3000;
+app.listen(port);
+console.log('Server listening at port:', port);
