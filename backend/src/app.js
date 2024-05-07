@@ -1,6 +1,6 @@
 import './database/connection.js'
 import express from 'express';
-import usersRoutes from './routes/users-routes.js';
+import usersRoutes from './routes/user.js';
 import HttpError from './models/http-error.js';
 import path from 'path';
 import { unlink } from 'fs';
