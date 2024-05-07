@@ -17,8 +17,8 @@ mongoose.connect('mongodb+srv://<username>:<password>@<cluster-url>/<database-na
 });
 
 // Models
-const User = require('./models/User');
-const Content = require('./models/Content');
+import User from '../models/user.js';
+import Content from '../models/content';
 
 // Routes
 const authRoutes = require('./routes/auth');

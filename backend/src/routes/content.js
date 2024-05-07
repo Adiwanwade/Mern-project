@@ -1,5 +1,5 @@
 const express = require('express');
-const Content = require('../models/Content');
+import Content from '../models/content';
 
 const router = express.Router();
 
