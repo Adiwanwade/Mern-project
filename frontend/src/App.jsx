@@ -12,6 +12,8 @@ import PostPage from './pages/PostPage';
 import Search from './pages/Search';
 import UpdatePost from './pages/UpdatePost';
 import SignIn from './pages/SignIn';
+import Header from './shared/components/Header/header';
+import Footer from './shared/components/Footer/footer';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,9 +25,10 @@ function App() {
   }, []);
 
   return (
-    <div className='flex'>
+    <>
       <AuthContext.Provider value={{isLoggedIn, login, logout}}>
       <Router>
+        <Header/>
         <SideBarNav />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -36,10 +39,11 @@ function App() {
           <Route path="/CreatePost" element={<CreatePost />} /> <Route path="/Dashboard" element={<Dashboard/>} /> <Route path="/PostPage" element={<PostPage />} /> <Route path="/Search" element={<Search />} /> 
           <Route path="/UpdatePost" element={<UpdatePost />} />
           <Route path="/SignIn" element={<SignIn/>} />
-        </Routes>        
+        </Routes>  
+        <Footer/>     
       </Router>
       </AuthContext.Provider>
-    </div>
+    </>
     
   )
 }

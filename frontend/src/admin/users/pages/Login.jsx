@@ -150,7 +150,7 @@ const Login = () => {
     };
 
     return (
-        <div className="flex w-full h-screen justify-center place-items-center">
+        <div className="flex justify-center">
             {isLoading && <LoadingSpinner />}
             <form className="p-4" onSubmit={signUpSubmitHandler}>
                 <Input

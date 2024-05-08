@@ -33,13 +33,13 @@ const SideBarNav = () => {
     ];
 
     const anonMenuList = [
-        { title: "Login", to: "/login", gap: true },
+        { title: "Login", to: "/Login", gap: true },
     ];
     const shouldOpen = (open || hover);
     return (
-        <div className="flex" onMouseEnter={mouseEnterHandler} onMouseLeave={mouseExitHandler}>
-            <div className={`${shouldOpen? 'w-48' : 'w-[30px]'} h-screen transition-all 
-                duration-500 relative p-4 bg-dark-purple`}>
+        <div  className='' onMouseEnter={mouseEnterHandler} onMouseLeave={mouseExitHandler}>
+            <div className={`${shouldOpen? 'w-48' : 'w-[30px]'}  transition-all 
+                duration-500 relative p-4 bg-gray-800`}>
                 <img
                     src={controlImage}
                     onClick={() => setOpen(!open)}
@@ -47,7 +47,7 @@ const SideBarNav = () => {
                     className={`w-[20px] absolute -right-3 border-2 rounded-full 
                             transition-all duration-500
                         border-dark-purple bg-dark-purple ${!shouldOpen && "rotate-180"} `} />
-                {shouldOpen ? <h3 className="text-white font-bold text-[18px]">Simple Blog</h3> : null}
+                
 
                 {shouldOpen ? <ul className='mt-10'>
                     {publicMenuList
