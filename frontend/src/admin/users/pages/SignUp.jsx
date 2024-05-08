@@ -17,7 +17,7 @@ export default function SignUp() {
     try {
       setLoading(true);
       setErrorMessage(null);
-      const res = await fetch('/api/auth/signup', {
+      const res = await fetch('/api/auth/signUp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -28,7 +28,7 @@ export default function SignUp() {
       }
       setLoading(false);
       if(res.ok) {
-        navigate('/sign-in');
+        navigate('/signIn');
       }
     } catch (error) {
       setErrorMessage(error.message);

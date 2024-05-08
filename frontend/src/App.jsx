@@ -1,51 +1,42 @@
-import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
-import SideBarNav from './shared/components/SideBarNav';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './home/pages/Home';
-import UserList from './admin/users/pages/UserList';
-import Login from './admin/users/pages/Login';
-import { AuthContext } from './shared/context/auth-context';
-import { useState, useCallback } from 'react';
 import About from './pages/About';
-import CreatePost from './pages/CreatePost';
-import Dashboard from './pages/Dashboard';
-import PostPage from './pages/PostPage';
-import Search from './pages/Search';
-import UpdatePost from './pages/UpdatePost';
 import SignIn from './pages/SignIn';
+import Dashboard from './pages/Dashboard';
+import SignUp from './pages/SignUp';
 import Header from './shared/components/Header/header';
 import Footer from './shared/components/Footer/footer';
+// import PrivateRoute from './components/PrivateRoute';
+// import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute';
+import CreatePost from './pages/CreatePost';
+import UpdatePost from './pages/UpdatePost';
+import PostPage from './pages/PostPage';
+// import ScrollToTop from './components/ScrollToTop';
+import Search from './pages/Search';
 
-function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const login = useCallback(() => {
-    setIsLoggedIn(true);
-  }, []);
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-  }, []);
-
+export default function App() {
   return (
-    <>
-      <AuthContext.Provider value={{isLoggedIn, login, logout}}>
-      <Router>
-        <Header/>
-        <SideBarNav />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/users" element={<UserList />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/About" element={<About />} />
+    <BrowserRouter>
+      {/* <ScrollToTop /> */}
+      <Header />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/about' element={<About />} />
+        <Route path='/sign-in' element={<SignIn />} />
+        <Route path='/sign-up' element={<SignUp />} />
+        <Route path='/search' element={<Search />} />
+        {/* <Route element={<PrivateRoute />}> */}
+          <Route path='/dashboard' element={<Dashboard />} />
+        {/* </Route> */}
+        {/* <Route element={<OnlyAdminPrivateRoute />}> */}
+          <Route path='/create-post' element={<CreatePost />} />
+          <Route path='/update-post/:postId' element={<UpdatePost />} />
+        {/* </Route> */}
 
-          <Route path="/CreatePost" element={<CreatePost />} /> <Route path="/Dashboard" element={<Dashboard/>} /> <Route path="/PostPage" element={<PostPage />} /> <Route path="/Search" element={<Search />} /> 
-          <Route path="/UpdatePost" element={<UpdatePost />} />
-          <Route path="/SignIn" element={<SignIn/>} />
-        </Routes>  
-        <Footer/>     
-      </Router>
-      </AuthContext.Provider>
-    </>
-    
-  )
+      
+        <Route path='/post/:postSlug' element={<PostPage />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  );
 }
-
-export default App
