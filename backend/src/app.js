@@ -3,11 +3,13 @@ import express from 'express';
 import usersRoutes from './routes/user.route.js';
 import HttpError from './models/http-error.js';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 import { unlink } from 'fs';
-import authRoutes from './routes/auth.route.js'
+import authRoutes from './routes/auth.route.js';
+dotenv.config();
 const app = express();
 app.use(express.json());
-
+app.use(cookieParser());
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader(
