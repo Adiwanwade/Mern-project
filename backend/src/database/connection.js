@@ -1,17 +1,15 @@
 import 'dotenv/config';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-const url = `mongodb+srv://${process.env.DATABASE_USERNAME}:${process.env.DATABASE_PASSWORD}@${process.env.DATABASE_HOST}/?retryWrites=true&w=majority`;
-const options = {
-    dbName: process.env.DATABASE_NAME,
-}
 
-mongoose.connect(url, options).then(() => {
+
+mongoose.connect(process.env.MONGO).then(() => {
     console.log('Mongoose connect success.');
 
     mongoose.connection.once('connected', () => {
         console.log('Database Connected');
-    })
+    });
 
     process.on('SIGINT', async () => {
         await mongoose.connection.close(true);
@@ -19,5 +17,5 @@ mongoose.connect(url, options).then(() => {
         process.exit(0);    
     });
 }).catch((err) => {
-    console.error('Mongoose connect failed.');
+    console.error('Mongoose connect failed.', err); // Log the error
 });
