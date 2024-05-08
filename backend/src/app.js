@@ -1,10 +1,10 @@
 import './database/connection.js'
 import express from 'express';
-import usersRoutes from './routes/user.js';
+import usersRoutes from './routes/user.route.js';
 import HttpError from './models/http-error.js';
 import path from 'path';
 import { unlink } from 'fs';
-
+import authRoutes from './routes/auth.route.js'
 const app = express();
 app.use(express.json());
 
@@ -26,30 +26,22 @@ app.use((req, res, next) => {
 
 app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
-app.use('/api/users', usersRoutes);
-
+app.use('/api/user', userRoutes);
+app.use('/api/auth', authRoutes);
 app.use((req, res, next) => {
     throw new HttpError('Page does not exist', 404);
 });
 
 // special error handler middleware
-app.use((error, req, res, next) => {
-    if (req.file) {
-        unlink(req.file.path, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-    if (res.headerSent) {
-        return next(error);
-    }
-    res
-        .status(error.code || 500)
-        .json({
-            message: error.message || 'Server error'
-        });
-});
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    res.status(statusCode).json({
+      success: false,
+      statusCode,
+      message,
+    });
+  });
 
 const port = 3000;
 app.listen(port);
