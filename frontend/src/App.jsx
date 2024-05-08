@@ -6,7 +6,7 @@ import Dashboard from './pages/Dashboard';
 import SignUp from './pages/SignUp';
 import Header from './shared/components/Header/header';
 import Footer from './shared/components/Footer/footer';
-// import PrivateRoute from './components/PrivateRoute';
+import PrivateRoute from './components/PrivateRoute';
 // import OnlyAdminPrivateRoute from './components/OnlyAdminPrivateRoute';
 import CreatePost from './pages/CreatePost';
 import UpdatePost from './pages/UpdatePost';
@@ -25,9 +25,9 @@ export default function App() {
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/search' element={<Search />} />
-        {/* <Route element={<PrivateRoute />}> */}
+        <Route element={<PrivateRoute />}>
           <Route path='/dashboard' element={<Dashboard />} />
-        {/* </Route> */}
+        </Route>
         {/* <Route element={<OnlyAdminPrivateRoute />}> */}
           <Route path='/create-post' element={<CreatePost />} />
           <Route path='/update-post/:postId' element={<UpdatePost />} />
