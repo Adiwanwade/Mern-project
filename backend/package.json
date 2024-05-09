@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon src/app.js",
-    "seed": "node src/database/seeder.js",
+    "seed": "node src/Database/seeder.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Aditya",

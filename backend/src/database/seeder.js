@@ -1,26 +1,61 @@
-import './connection.js';
-import User from '../models/user.js';
+// Import necessary modules
+import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
+import dotenv from 'dotenv';
+import User from '../models/user.model.js'; // Adjust the path as necessary
 
-const up = async () => {
-    const adminUser = await User.findOne({ name: 'Admin User' });
-    if (!adminUser) {
-        console.log('Admin user does not exist creating admin user');
-        const hashedPassword = await bcrypt.hash("admin123", 12);
-        await User.create([{
-            name: "Admin User",
-            email: "admin@company.com",
-            password: hashedPassword,
-            role: "admin",
-        }]);
-    } else {
-        console.log('Admin user exists');        
+// Load environment variables
+dotenv.config();
+
+// MongoDB connection string
+const mongoURI = process.env.MONGO;
+
+// Function to connect to MongoDB
+const connectDB = async () => {
+  try {
+    await mongoose.connect(mongoURI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log('MongoDB Connected...');
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+    process.exit(1);
+  }
+};
+
+// Seeder function to create an admin user
+const seedAdmin = async () => {
+  try {
+    // Attempt to find the admin user
+    const adminExists = await User.findOne({ email: 'adityadummy@gmail.com' });
+
+    if (adminExists) {
+      console.warn('Admin user already exists');
+      return;
     }
-    process.exit(0);
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash('aditya@2004', 10);
+
+    // Create admin user
+    const adminUser = new User({
+      username: 'Aditya',
+      email: 'adityadummy@gmail.com',
+      password: hashedPassword,
+      isAdmin: true, // Ensure this matches your schema field for admin users
+    });
+
+    await adminUser.save();
+    console.log('Admin user created');
+
+  } catch (error) {
+    console.error(`Error seeding admin: ${error}`);
+  } finally {
+    // Close the MongoDB connection
+    mongoose.connection.close();
+  }
 };
 
-const down = async () => {
-    await User.deleteMany();
-};
-
-queueMicrotask(up);
+// Connect to DB and run seeder
+connectDB().then(seedAdmin);
