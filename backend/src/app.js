@@ -6,6 +6,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import { unlink } from 'fs';
 import authRoutes from './routes/auth.route.js';
+import postRoutes from './routes/post.route.js';
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -30,6 +31,7 @@ app.use('/uploads/images', express.static(path.join('uploads', 'images')));
 
 app.use('/api/user', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/post', postRoutes);
 app.use((req, res, next) => {
     throw new HttpError('Page does not exist', 404);
 });
