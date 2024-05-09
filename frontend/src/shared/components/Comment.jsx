@@ -1,7 +1,12 @@
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { Button, Textarea } from 'flowbite-react';
-import { set } from 'mongoose';
+// import { set } from 'mongoose';
+import PropTypes from 'prop-types';
+
+import { FaThumbsUp } from 'react-icons/fa'; 
+/*global useSelector,*/
+/*eslint no-undef: "error"*/
 export default function Comment({ comment,onLike,onEdit,onDelete}) {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
@@ -138,3 +143,17 @@ export default function Comment({ comment,onLike,onEdit,onDelete}) {
     </div>
   );
 }
+
+Comment.propTypes = {
+  comment: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    likes: PropTypes.arrayOf(PropTypes.string).isRequired,
+    numberOfLikes: PropTypes.number.isRequired,
+  }).isRequired,
+  onLike: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};

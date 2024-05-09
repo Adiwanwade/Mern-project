@@ -1,5 +1,6 @@
 import Backdrop from "./ui-elements/Backdrop";
-const LoadingSpinner = props => {
+// eslint-disable-next-line no-unused-vars
+const LoadingSpinner = _props => {
     return (
         <>
         <Backdrop />
