@@ -2,7 +2,7 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { Button, Textarea } from 'flowbite-react';
 import { set } from 'mongoose';
-export default function Comment({ comment,onLike,onEdit}) {
+export default function Comment({ comment,onLike,onEdit,onDelete}) {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(comment.content);
@@ -31,11 +31,11 @@ export default function Comment({ comment,onLike,onEdit}) {
       const res  = await fetch(`/api/comment/editComment/${comment._id}`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          content: editedContent
-        })
+          content: editedContent,
+        }),
       });
       if (res.ok) {
         setIsEditing(false);
@@ -45,7 +45,7 @@ export default function Comment({ comment,onLike,onEdit}) {
       console.log(error.message);
     }
 
-  }
+  };
   return (
     <div className='flex p-4 border-b dark:border-gray-600 text-sm'>
       <div className='flex-shrink-0 mr-3'>
@@ -66,30 +66,30 @@ export default function Comment({ comment,onLike,onEdit}) {
         </div>
         {isEditing ? (
           <>
-          <Textarea
-            className='mb-2'
-            value={editedContent}
-            onChange={(e) => setEditedContent(e.target.value)}
-          />
-          <div className="flex justify-end gap-2 text-xs">
-            <Button
-             type='button'
-             size='sm'
-             gradientDuoTone='purpleToBlue'
-              onClick={handleSave}
-            >
-              Save
-            </Button>
-            <Button
-             type='button'
-             size='sm'
-             gradientDuoTone='purpleToBlue'
-             outline
-              onClick={() => setIsEditing(false)}
-            >
-              Cancel
-            </Button>
-          </div>
+            <Textarea
+              className='mb-2'
+              value={editedContent}
+              onChange={(e) => setEditedContent(e.target.value)}
+            />
+            <div className='flex justify-end gap-2 text-xs'>
+              <Button
+                type='button'
+                size='sm'
+                gradientDuoTone='purpleToBlue'
+                onClick={handleSave}
+              >
+                Save
+              </Button>
+              <Button
+                type='button'
+                size='sm'
+                gradientDuoTone='purpleToBlue'
+                outline
+                onClick={() => setIsEditing(false)}
+              >
+                Cancel
+              </Button>
+            </div>
           </>
         ) : (
           <>
@@ -114,13 +114,22 @@ export default function Comment({ comment,onLike,onEdit}) {
               </p>
               {currentUser &&
                 (currentUser._id === comment.userId || currentUser.isAdmin) && (
-                  <button
-                    type='button'
-                    onClick={handleEdit}
-                    className='text-gray-400 hover:text-blue-500'
-                  >
-                    Edit
-                  </button>
+                    <>
+                    <button
+                      type='button'
+                      onClick={handleEdit}
+                      className='text-gray-400 hover:text-blue-500'
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type='button'
+                      onClick={() => onDelete(comment._id)}
+                      className='text-gray-400 hover:text-red-500'
+                    >
+                      Delete
+                    </button>
+                  </>
                 )}
             </div>
           </>
