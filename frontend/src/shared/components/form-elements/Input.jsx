@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useReducer } from "react";
 import { validate } from '../../utils/validators';
 

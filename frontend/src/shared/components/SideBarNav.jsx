@@ -15,10 +15,12 @@ const SideBarNav = () => {
         auth.logout();
         navigate('/');
     };
-    const mouseEnterHandler = event => {
+    // eslint-disable-next-line no-unused-vars
+    const mouseEnterHandler = _event => {
         setHover(true);
     };
-    const mouseExitHandler = event => {
+    // eslint-disable-next-line no-unused-vars
+    const mouseExitHandler = _event => {
         setHover(false);
     };
     const publicMenuList = [
@@ -43,7 +45,7 @@ const SideBarNav = () => {
                 <img
                     src={controlImage}
                     onClick={() => setOpen(!open)}
-                    onMouseEnter={(event) => {event.stopPropagation();;}}
+                    onMouseEnter={(event) => {event.stopPropagation();}}
                     className={`w-[20px] absolute -right-3 border-2 rounded-full 
                             transition-all duration-500
                         border-dark-purple bg-dark-purple ${!shouldOpen && "rotate-180"} `} />

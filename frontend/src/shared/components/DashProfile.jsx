@@ -1,4 +1,4 @@
-import { Alert, Button, Modal, ModalBody, TextInput } from 'flowbite-react';
+import { Alert, Button, Modal, TextInput } from 'flowbite-react';
 import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ import {
     deleteUserSuccess,
     deleteUserFailure,
     signoutSuccess,
-  } from '../redux/user/userSlice';
+  } from '../../redux/user/userSlice';
   import { HiOutlineExclamationCircle } from 'react-icons/hi';
   import { useDispatch } from 'react-redux';
 import {
@@ -19,7 +19,7 @@ import {
     ref,
     uploadBytesResumable,
   } from 'firebase/storage';
-  import { app } from '../firebase';
+  import { app } from '../../firebase';
   import { CircularProgressbar } from 'react-circular-progressbar';
   import 'react-circular-progressbar/dist/styles.css';
 export default function DashProfile() {
@@ -46,8 +46,9 @@ export default function DashProfile() {
       if (imageFile) {
         uploadImage();
       }
-    }, [imageFile]);
+    }, [imageFile, uploadImage]);
   
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const uploadImage = async () => {
       // service firebase.storage {
       //   match /b/{bucket}/o {
@@ -73,7 +74,7 @@ export default function DashProfile() {
   
           setImageFileUploadProgress(progress.toFixed(0));
         },
-        (error) => {
+        () => {
           setImageFileUploadError(
             'Could not upload image (File must be less than 2MB)'
           );
@@ -290,7 +291,7 @@ export default function DashProfile() {
             </h3>
             <div className='flex justify-center gap-4'>
               <Button color='failure' onClick={handleDeleteUser}>
-                Yes, I'm sure
+                Yes, I am sure
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
                 No, cancel

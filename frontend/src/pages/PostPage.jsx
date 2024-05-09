@@ -1,13 +1,13 @@
 import { Button, Spinner } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import CallToAction from '../components/CallToAction';
-import CommentSection from '../components/CommentSection';
-import PostCard from '../components/PostCard';
+import CallToAction from '../shared/components/CallToAction';
+import CommentSection from '../shared/components/CommentSection';
+import PostCard from '../shared/components/postCard';
 export default function PostPage() {
   const { postSlug } = useParams();
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [ setError] = useState(false);
   const [post, setPost] = useState(null);
   const [recentPosts, setRecentPosts] = useState(null);
 
@@ -33,7 +33,7 @@ export default function PostPage() {
       }
     };
     fetchPost();
-  }, [postSlug]);
+  }, [postSlug, setError]);
   useEffect(() => {
     try {
       const fetchRecentPosts = async () => {

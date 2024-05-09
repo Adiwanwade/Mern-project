@@ -1,7 +1,7 @@
 import { Button, Select, TextInput } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import PostCard from '../components/PostCard';
+import PostCard from '../shared/components/postCard';
 
 export default function Search() {
   const [sidebarData, setSidebarData] = useState({
@@ -53,7 +53,7 @@ export default function Search() {
       }
     };
     fetchPosts();
-  }, [location.search]);
+  }, [location.search, sidebarData]);
 
   const handleChange = (e) => {
     if (e.target.id === 'searchTerm') {

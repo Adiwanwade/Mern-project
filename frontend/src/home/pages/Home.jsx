@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import CallToAction from '../components/CallToAction';
+import CallToAction from '../../shared/components/CallToAction';
 import { useEffect, useState } from 'react';
-import PostCard from '../components/PostCard';
+import PostCard from '../../shared/components/postCard';
 
 export default function Home() {
   const [posts, setPosts] = useState([]);
@@ -20,7 +20,7 @@ export default function Home() {
       <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto '>
         <h1 className='text-3xl font-bold lg:text-6xl'>Welcome to my Blog</h1>
         <p className='text-gray-500 text-xs sm:text-sm'>
-          Here you'll find a variety of articles and tutorials on topics such as
+          Here you will find a variety of articles and tutorials on topics such as
           web development, software engineering, and programming languages.
         </p>
         <Link
