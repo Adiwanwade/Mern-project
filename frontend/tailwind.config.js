@@ -9,6 +9,11 @@ export default {
   ],
   theme: {
     extend: {},
+    colors: {
+      'or': '#ff9840',
+      'nu': ' #cb1212',
+      'vi': '#2e1065',
+      },
   },
   plugins: [
     require('flowbite/plugin'),

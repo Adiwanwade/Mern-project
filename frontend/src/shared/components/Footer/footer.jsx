@@ -11,10 +11,10 @@ export default function FooterCom() {
               to='/'
               className='self-center whitespace-nowrap text-lg sm:text-xl font-semibold dark:text-white'
             >
-              <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-                Aditya
+              <span className='px-2 py-1 bg-gradient-to-r from-vi via-nu to-or rounded-lg text-white'>
+                Movie
               </span>
-              Blog
+              Matrix
             </Link>
           </div>
           <div className='grid grid-cols-2 gap-8 mt-4 sm:grid-cols-3 sm:gap-6'>
@@ -22,7 +22,7 @@ export default function FooterCom() {
               <Footer.Title title='About' />
               <Footer.LinkGroup col>
                 <Footer.Link
-                  href=''
+                  href='https://github.com/Adiwanwade'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
@@ -33,7 +33,7 @@ export default function FooterCom() {
                   target='_blank'
                   rel='noopener noreferrer'
                 >
-                  Aditya Blog
+                  Movie Matrix
                 </Footer.Link>
               </Footer.LinkGroup>
             </div>
@@ -41,13 +41,13 @@ export default function FooterCom() {
               <Footer.Title title='Follow us' />
               <Footer.LinkGroup col>
                 <Footer.Link
-                  href=''
+                  href='https://github.com/Adiwanwade'
                   target='_blank'
                   rel='noopener noreferrer'
                 >
                   Github
                 </Footer.Link>
-                <Footer.Link href='#'>Discord</Footer.Link>
+                <Footer.Link href='https://www.linkedin.com/in/aditya-wanwade-07b888216?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app'>LinkedIn</Footer.Link>
               </Footer.LinkGroup>
             </div>
             <div>
@@ -63,14 +63,14 @@ export default function FooterCom() {
         <div className='w-full sm:flex sm:items-center sm:justify-between'>
           <Footer.Copyright
             href='#'
-            by="Aditya's blog"
+            by="Movie Matrix"
             year={new Date().getFullYear()}
           />
           <div className="flex gap-6 sm:mt-0 mt-4 sm:justify-center">
             <Footer.Icon href='#' icon={BsFacebook}/>
             <Footer.Icon href='#' icon={BsInstagram}/>
             <Footer.Icon href='#' icon={BsTwitter}/>
-            <Footer.Icon href='' icon={BsGithub}/>
+            <Footer.Icon href='https://github.com/Adiwanwade' icon={BsGithub}/>
             <Footer.Icon href='#' icon={BsDribbble}/>
 
           </div>
