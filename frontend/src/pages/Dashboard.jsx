@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import DashSidebar from '../components/DashSidebar';
 import DashProfile from '../components/DashProfile';
-import DashboardComp from '../components/DashboardComp';
+import DashComments from '../components/DashComments';
 import DashPosts from '../components/DashPosts';
 import DashUsers from '../shared/components/DashUsers';
+import DashboardComp from '../shared/components/DashboardComp';
 export default function Dashboard() {
   const location = useLocation();
   const [tab, setTab] = useState('');
