@@ -107,7 +107,15 @@ export default function CreatePost() {
             <option value='Comedy'>Comedy</option>
             <option value='Thriller'>Thriller</option>
             <option value='Action'>Action</option>
-          </Select>
+            <option value='Drama'>Drama</option>
+            <option value='Musical'>Musical</option>     
+            <option value='Romance'>Romance</option>      
+            <option value='Animation '>Animation </option>  
+            <option value='Documentary'>Documentary</option>
+            <option value='Historical '>Historical</option>
+            <option value='Adventure'>Adventure</option> 
+            <option value='Mystery'>Mystery</option> 
+                            </Select>
         </div>
         <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
         <FileInput
