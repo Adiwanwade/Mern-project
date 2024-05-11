@@ -4,9 +4,9 @@ import { Button, Textarea } from 'flowbite-react';
 // import { set } from 'mongoose';
 import PropTypes from 'prop-types';
 
+import { useSelector } from 'react-redux';
 import { FaThumbsUp } from 'react-icons/fa'; 
-/*global useSelector,*/
-/*eslint no-undef: "error"*/
+
 export default function Comment({ comment,onLike,onEdit,onDelete}) {
   const [user, setUser] = useState({});
   const [isEditing, setIsEditing] = useState(false);
