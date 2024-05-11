@@ -18,7 +18,7 @@ To get started with Movie Matrix, follow the steps below to set up the project o
 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/movie-matrix.git
+git clone https://github.com/Adiwanwade/mern-project.git
 cd movie-matrix
 ```
 
@@ -78,4 +78,4 @@ We welcome contributions to Movie Matrix! If you have suggestions for improvemen
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 Happy reviewing! 🎬🍿
-```
+
