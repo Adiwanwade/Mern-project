@@ -24,7 +24,7 @@ export default function Search() {
       const searchQuery = urlParams.toString();
       
       try {
-        const res = await fetch(`/api/post/getposts?${searchQuery}`);
+        const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getposts?${searchQuery}`);
         if (!res.ok) {
           throw new Error('Failed to fetch');
         }
@@ -65,7 +65,7 @@ export default function Search() {
     const searchQuery = urlParams.toString();
 
     try {
-      const res = await fetch(`/api/post/getposts?${searchQuery}`);
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/post/getposts?${searchQuery}`);
       if (!res.ok) {
         throw new Error('Failed to fetch');
       }

@@ -1,4 +1,4 @@
-
+import cors from 'cors';
 import express from 'express';
 import usersRoutes from './routes/user.route.js';
 import path from 'path';
@@ -27,6 +27,15 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+// const cors = require('cors');
+
+const corsOptions = {
+  origin: process.env.FRONTEND_URL, // Replace with your Vercel frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed methods
+  credentials: true, // If using cookies
+};
+
+app.use(cors(corsOptions));
 
 app.listen(3000, () => {
   console.log('Server is running on port 3000!');

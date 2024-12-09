@@ -63,7 +63,7 @@ export default function OAuth() {
             console.log('Results from Google:', resultsFromGoogle);
 
             // Send user data to server for authentication
-            const res = await fetch('/api/auth/google', {
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
