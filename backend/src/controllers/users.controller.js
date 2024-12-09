@@ -2,6 +2,15 @@ import bcryptjs from 'bcryptjs';
 import { errorHandler } from '../utils/error.js';
 import User from '../models/user.model.js';
 
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * A test route to check if the API is working
+ * @function
+ * @param {http.IncomingMessage} req - The request object
+ * @param {http.ServerResponse} res - The response object
+ * @returns {Promise<void>}
+ */
+/******  1ae9fd7d-8ce7-44e3-acfb-4e0ad9939262  *******/
 export const test = (req, res) => {
   res.json({ message: 'API is working!' });
 };
